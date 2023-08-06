@@ -77,6 +77,19 @@ def criar_grafico_contorno(cargas, resolucao = 100):
 
 # ************************************************************************************************
 
+ # Cálculo do potencial elétrico em cada ponto do espaço e armazenamento nos valores de Z
+    for i in range(resolucao):
+        
+        for j in range(resolucao):
+            ponto = (X[i, j], Y[i, j])
+            
+            for carga, pos_carga in cargas:
+                Z[i, j] += calcular_potencial(carga, pos_carga, ponto)
+
+    return X, Y, Z
+
+# ************************************************************************************************
+
 ## Criar gráfico das cargas.
 
 def main():
