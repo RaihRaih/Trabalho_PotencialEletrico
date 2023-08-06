@@ -29,3 +29,5 @@ def main():
     
 if __name__ == "__main__":
     main()
+
+# Função para calcular o potencial elétrico em um ponto causado por uma carga em uma posição
