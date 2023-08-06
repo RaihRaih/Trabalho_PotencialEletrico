@@ -45,4 +45,12 @@ def calcular_potencial(carga, pos_carga, ponto):
 # Função para criar o gráfico de contorno do potencial elétrico
 def criar_grafico_contorno(cargas, resolucao = 100):
     
-# Definição das coordenadas do espaço em que o gráfico será criado
+    # Definição das coordenadas do espaço em que o gráfico será criado
+    x_min, x_max = -10, 10
+    y_min, y_max = -10, 10
+    
+    x = np.linspace(x_min, x_max, resolucao)
+    y = np.linspace(y_min, y_max, resolucao)
+    
+    X, Y = np.meshgrid(x, y)
+    Z = np.zeros_like(X)
