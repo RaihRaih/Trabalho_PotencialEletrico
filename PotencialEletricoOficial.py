@@ -8,6 +8,9 @@ from tkinter import simpledialog
 import matplotlib.pyplot as plt
 import numpy as np
 
+
+# ************************************************************************************************
+
 # Função para selecionar a quantidade de cargas elétricas
 def selecionar_quantidade_cargas():
     
@@ -19,6 +22,9 @@ def selecionar_quantidade_cargas():
     root.destroy()
     
     return num_cargas
+
+# ************************************************************************************************
+
 
 #Função para selecionar os valores das cargas elétricas e suas posições
 def selecionar_valores_cargas(num_cargas):
@@ -38,21 +44,8 @@ def selecionar_valores_cargas(num_cargas):
     root.destroy()
     return cargas
 
+# ************************************************************************************************
 
-
-
-
-def main():
-    
-    num_cargas = selecionar_quantidade_cargas()
-    print(f"Quantidade de cargas selecionadas: {num_cargas}")
-    
-    valores_cargas = selecionar_valores_cargas(num_cargas)
-    print("Valores das cargas selecionados:", valores_cargas)
-    
-    
-if __name__ == "__main__":
-    main()
 
 # Função para calcular o potencial elétrico em um ponto causado por uma carga em uma posição
 def calcular_potencial(carga, pos_carga, ponto):
@@ -66,6 +59,8 @@ def calcular_potencial(carga, pos_carga, ponto):
     
     return k * carga / distancia    # Cálculo do potencial elétrico usando a Lei de Coulomb
 
+# ************************************************************************************************
+
 # Função para criar o gráfico de contorno do potencial elétrico
 def criar_grafico_contorno(cargas, resolucao = 100):
     
@@ -78,3 +73,21 @@ def criar_grafico_contorno(cargas, resolucao = 100):
     
     X, Y = np.meshgrid(x, y)
     Z = np.zeros_like(X)
+
+
+# ************************************************************************************************
+
+## Criar gráfico das cargas.
+
+def main():
+    
+    num_cargas = selecionar_quantidade_cargas()
+    print(f"Quantidade de cargas selecionadas: {num_cargas}")
+    
+    valores_cargas = selecionar_valores_cargas(num_cargas)
+    print("Valores das cargas selecionados:", valores_cargas)
+    
+    #Desenhar esse gráfico de contorno na tela juntamente com o gráfico das caragas.
+    
+if __name__ == "__main__":
+    main()
