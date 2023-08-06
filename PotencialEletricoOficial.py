@@ -53,3 +53,28 @@ def main():
     
 if __name__ == "__main__":
     main()
+
+# Função para calcular o potencial elétrico em um ponto causado por uma carga em uma posição
+def calcular_potencial(carga, pos_carga, ponto):
+    
+    k = 9e9 # Constante eletrostática (k)
+    
+    # Cálculo da distância entre a carga e o ponto no espaço
+    dx = ponto[0] - pos_carga[0]
+    dy = ponto[1] - pos_carga[1]
+    distancia = (dx*2 + dy2)*0.5
+    
+    return k * carga / distancia    # Cálculo do potencial elétrico usando a Lei de Coulomb
+
+# Função para criar o gráfico de contorno do potencial elétrico
+def criar_grafico_contorno(cargas, resolucao = 100):
+    
+    # Definição das coordenadas do espaço em que o gráfico será criado
+    x_min, x_max = -10, 10
+    y_min, y_max = -10, 10
+    
+    x = np.linspace(x_min, x_max, resolucao)
+    y = np.linspace(y_min, y_max, resolucao)
+    
+    X, Y = np.meshgrid(x, y)
+    Z = np.zeros_like(X)
