@@ -31,3 +31,7 @@ if __name__ == "__main__":
     main()
 
 # Função para calcular o potencial elétrico em um ponto causado por uma carga em uma posição
+
+# Função para criar o gráfico de contorno do potencial elétrico
+
+# Definição das coordenadas do espaço em que o gráfico será criado
