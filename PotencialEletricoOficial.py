@@ -1,5 +1,5 @@
 # Trabalho de Física - Potencial Elétrico
-# Alberth Emanuel - Carolina Fonseca - Raissa Maia - Igor Amorim
+# Alberth Emanuel - Carolina Fonseca - Raissa Maia
 
 #Extensões que serão usadas são: matplotlib, numpy e tkinter
 import tkinter as tk
@@ -8,8 +8,8 @@ from tkinter import simpledialog
 import matplotlib.pyplot as plt
 import numpy as np
 
+fig = None
 
-# ************************************************************************************************
 
 # Função para selecionar a quantidade de cargas elétricas
 def selecionar_quantidade_cargas():
@@ -23,13 +23,10 @@ def selecionar_quantidade_cargas():
     
     return num_cargas
 
-# ************************************************************************************************
 
-
-#Função para selecionar os valores das cargas elétricas e suas posições
+# Função para selecionar os valores das cargas elétricas e suas posições    (ALBERTH)
 def selecionar_valores_cargas(num_cargas):
     
-    # Cria uma janela pop-up usando tkinter e pede ao usuário para inserir os valores das cargas e suas posições
     cargas = []
     root = tk.Tk()
     root.withdraw()
@@ -39,15 +36,14 @@ def selecionar_valores_cargas(num_cargas):
         carga = simpledialog.askfloat(f"Carga {i+1}", f"Digite a carga {i+1} (em Coulombs):")
         pos_x = simpledialog.askfloat(f"Carga {i+1}", f"Digite a posição x da carga {i+1}:")
         pos_y = simpledialog.askfloat(f"Carga {i+1}", f"Digite a posição y da carga {i+1}:")
+        
         cargas.append((carga, (pos_x, pos_y)))
         
     root.destroy()
     return cargas
 
-# ************************************************************************************************
 
-
-# Função para calcular o potencial elétrico em um ponto causado por uma carga em uma posição
+# Função para calcular o potencial elétrico em um ponto causado por uma carga em uma posição    (ALBERTH)
 def calcular_potencial(carga, pos_carga, ponto):
     
     k = 9e9 # Constante eletrostática (k)
@@ -55,7 +51,7 @@ def calcular_potencial(carga, pos_carga, ponto):
     # Cálculo da distância entre a carga e o ponto no espaço
     dx = ponto[0] - pos_carga[0]
     dy = ponto[1] - pos_carga[1]
-    distancia = (dx*2 + dy2)*0.5
+    distancia = (dx**2 + dy**2)**0.5
     
     return k * carga / distancia    # Cálculo do potencial elétrico usando a Lei de Coulomb
 
