@@ -24,7 +24,7 @@ def selecionar_quantidade_cargas():
     return num_cargas
 
 
-# Função para selecionar os valores das cargas elétricas e suas posições    (ALBERTH)
+# Função para selecionar os valores das cargas elétricas e suas posições    
 def selecionar_valores_cargas(num_cargas):
     
     cargas = []
@@ -43,7 +43,7 @@ def selecionar_valores_cargas(num_cargas):
     return cargas
 
 
-# Função para calcular o potencial elétrico em um ponto causado por uma carga em uma posição    (ALBERTH)
+# Função para calcular o potencial elétrico em um ponto causado por uma carga em uma posição   
 def calcular_potencial(carga, pos_carga, ponto):
     
     k = 9e9 # Constante eletrostática (k)
@@ -57,7 +57,7 @@ def calcular_potencial(carga, pos_carga, ponto):
 
 # ************************************************************************************************
 
-# Função para criar o gráfico de contorno do potencial elétrico
+# Função para criar o gráfico de contorno do potencial elétrico usando  
 def criar_grafico_contorno(cargas, resolucao = 100):
     
     # Definição das coordenadas do espaço em que o gráfico será criado
@@ -70,10 +70,7 @@ def criar_grafico_contorno(cargas, resolucao = 100):
     X, Y = np.meshgrid(x, y)
     Z = np.zeros_like(X)
 
-
-# ************************************************************************************************
-
- # Cálculo do potencial elétrico em cada ponto do espaço e armazenamento nos valores de Z
+    # Cálculo do potencial elétrico em cada ponto do espaço e armazenamento nos valores de Z
     for i in range(resolucao):
         
         for j in range(resolucao):
@@ -84,9 +81,8 @@ def criar_grafico_contorno(cargas, resolucao = 100):
 
     return X, Y, Z
 
-# ************************************************************************************************
 
-# Função para desenhar as cargas no gráfico e criar os subplots para os gráficos
+# Função para desenhar as cargas no gráfico e criar os subplots para os gráficos       
 def desenhar_grafico_cargas(cargas):
     
     global fig  
@@ -107,6 +103,30 @@ def desenhar_grafico_cargas(cargas):
     plt.show()
 
     return ax1, ax2
+
+
+# Função para atualizar o gráfico de contorno           
+def atualizar_grafico_contorno(ax2, X, Y, Z, valores_cargas, ponto):        
+    
+    # Recálculo do potencial elétrico em cada ponto do espaço usando o novo ponto selecionado
+    for i in range(X.shape[0]):
+        
+        for j in range(X.shape[1]):
+            
+            ponto_atual = (X[i, j], Y[i, j])
+            Z[i, j] = 0
+            
+            for carga, pos_carga in valores_cargas:
+                Z[i, j] += calcular_potencial(carga, pos_carga, ponto_atual)
+
+    # Plotagem do gráfico de contorno (heatmap) atualizado
+    cs = ax2.contourf(X, Y, Z, cmap='viridis')
+    
+    ax2.set_xlabel('Eixo x')
+    ax2.set_ylabel('Eixo y')
+    ax2.set_title('Gráfico de Contorno (Heatmap)')
+    
+    # fig.colorbar(cs, ax=ax2)
 
 # ************************************************************************************************
 
