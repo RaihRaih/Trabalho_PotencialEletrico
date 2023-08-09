@@ -73,6 +73,43 @@ def criar_grafico_contorno(cargas, resolucao = 100):
 
 # ************************************************************************************************
 
+ # Cálculo do potencial elétrico em cada ponto do espaço e armazenamento nos valores de Z
+    for i in range(resolucao):
+        
+        for j in range(resolucao):
+            ponto = (X[i, j], Y[i, j])
+            
+            for carga, pos_carga in cargas:
+                Z[i, j] += calcular_potencial(carga, pos_carga, ponto)
+
+    return X, Y, Z
+
+# ************************************************************************************************
+
+# Função para desenhar as cargas no gráfico e criar os subplots para os gráficos
+def desenhar_grafico_cargas(cargas):
+    
+    global fig  
+    
+    # Criação da figura e dos subplots
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+
+    # Desenho das cargas elétricas no primeiro subplot (gráfico 2D)
+    for carga, pos in cargas:
+        ax1.scatter(pos[0], pos[1], s=100, label=f"Carga: {carga}")
+
+    ax1.set_xlabel('Eixo x')
+    ax1.set_ylabel('Eixo y')
+    ax1.legend()
+
+    # Modo interativo
+    plt.ion()
+    plt.show()
+
+    return ax1, ax2
+
+# ************************************************************************************************
+
 ## Criar gráfico das cargas.
 
 def main():
