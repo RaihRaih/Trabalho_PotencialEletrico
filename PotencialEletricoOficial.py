@@ -130,17 +130,42 @@ def atualizar_grafico_contorno(ax2, X, Y, Z, valores_cargas, ponto):
 
 # ************************************************************************************************
 
-## Criar gráfico das cargas.
+def criar_linha_equipotencial(ax2, X, Y, Z, potencial_selecionado, nivel_potencial):        
+    
+    contour = ax2.contour(X, Y, Z, levels=[nivel_potencial], colors='g')
+    ax2.clabel(contour, inline=True, fontsize=20, fmt={nivel_potencial: f'Equipotencial {nivel_potencial:.3f} V'})
+
 
 def main():
-    
     num_cargas = selecionar_quantidade_cargas()
     print(f"Quantidade de cargas selecionadas: {num_cargas}")
-    
+
     valores_cargas = selecionar_valores_cargas(num_cargas)
     print("Valores das cargas selecionados:", valores_cargas)
-    
-    #Desenhar esse gráfico de contorno na tela juntamente com o gráfico das caragas.
-    
+
+    ax1, ax2 = desenhar_grafico_cargas(valores_cargas)
+
+    X, Y, Z = criar_grafico_contorno(valores_cargas)
+    atualizar_grafico_contorno(ax2, X, Y, Z, valores_cargas, (0, 0))
+
+    while True:
+        ponto_x, ponto_y = plt.ginput(1, timeout=-1)[0]
+        ponto = (ponto_x, ponto_y)
+
+        potencial_total = 0
+        
+        for carga, pos_carga in valores_cargas:
+            
+            potencial_total += calcular_potencial(carga, pos_carga, ponto)
+
+        potencial_total = round(potencial_total, 3)
+
+        print(f"Potencial elétrico no ponto ({ponto_x:.1f}, {ponto_y:.1f}): {potencial_total:.3f}")
+
+        atualizar_grafico_contorno(ax2, X, Y, Z, valores_cargas, ponto)
+        criar_linha_equipotencial(ax2, X, Y, Z, potencial_total, potencial_total)
+        
+        plt.draw()
+
 if __name__ == "__main__":
     main()
